@@ -1,16 +1,21 @@
 package jpa01.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
 
 @Entity
-@Table(name="livre")
+@Table(name="LIVRE")
 public class Livre {
+	
 	@Id
-	private int id ;
+	@Column(name="ID")
+	private int id;
 	
 	@Column(name = "TITRE",length = 255 , nullable = false )
 	private String titre ;
@@ -18,8 +23,16 @@ public class Livre {
 	@Column(name = "AUTEUR",length = 50 , nullable = false )
 	private String auteur ;
 	
+	@ManyToMany (mappedBy="livre")
+	private Set<Emprunt> emprunts;
+	
 	public Livre () {
-		
+       
+	}
+
+	@Override
+	public String toString() {
+		return "Livre [id=" + id + ", titre=" + titre + ", auteur=" + auteur + ", emprunts=" + emprunts + "]";
 	}
 
 	public int getId() {
@@ -46,10 +59,14 @@ public class Livre {
 		this.auteur = auteur;
 	}
 
-	@Override
-	public String toString() {
-		return "Livre [id=" + id + ", titre=" + titre + ", auteur=" + auteur + "]";
+	public Set<Emprunt> getEmprunts() {
+		return emprunts;
 	}
+
+	public void setEmprunts(Set<Emprunt> emprunts) {
+		this.emprunts = emprunts;
+	}
+
 	
 	
 	
