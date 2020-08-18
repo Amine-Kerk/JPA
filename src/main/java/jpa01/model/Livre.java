@@ -24,7 +24,7 @@ public class Livre {
 	private String auteur ;
 	
 	@ManyToMany (mappedBy="livre")
-	private Set<Emprunt> emprunts;
+	private Set<Livre> livre;
 	
 	public Livre () {
        
@@ -32,7 +32,7 @@ public class Livre {
 
 	@Override
 	public String toString() {
-		return "Livre [id=" + id + ", titre=" + titre + ", auteur=" + auteur + ", emprunts=" + emprunts + "]";
+		return "Livre [id=" + id + ", titre=" + titre + ", auteur=" + auteur + "]";
 	}
 
 	public int getId() {
@@ -59,13 +59,15 @@ public class Livre {
 		this.auteur = auteur;
 	}
 
-	public Set<Emprunt> getEmprunts() {
-		return emprunts;
+	public Set<Livre> getLivre() {
+		return livre;
 	}
 
-	public void setEmprunts(Set<Emprunt> emprunts) {
-		this.emprunts = emprunts;
+	public void setLivre(Set<Livre> livre) {
+		this.livre = livre;
 	}
+
+	
 
 	
 	

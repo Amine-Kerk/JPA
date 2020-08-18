@@ -37,7 +37,7 @@ public class Emprunt {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_CLIENT")
-	private int idClient; 
+	private Client id_client; 
 	
 	@ManyToMany
 	@JoinTable(name="COMPO",
@@ -52,7 +52,7 @@ public class Emprunt {
 	@Override
 	public String toString() {
 		return "Emprunt [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", delai=" + delai
-				+ ", idClient=" + idClient + ", livre=" + livre + "]";
+				+ ", idClient=" + id_client + ", livre=" + livre + "]";
 	}
 
 	public int getId() {
@@ -87,12 +87,12 @@ public class Emprunt {
 		this.delai = delai;
 	}
 
-	public int getIdClient() {
-		return idClient;
+	public Client getIdClient() {
+		return id_client;
 	}
 
-	public void setIdClient(int idClient) {
-		this.idClient = idClient;
+	public void setIdClient(Client id_client) {
+		this.id_client = id_client;
 	}
 
 	public Set<Livre> getLivre() {
