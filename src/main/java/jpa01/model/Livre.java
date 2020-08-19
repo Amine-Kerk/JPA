@@ -1,82 +1,74 @@
 package jpa01.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="LIVRE")
+@Table(name="livre")
 public class Livre {
-	
+
 	@Id
-	@Column(name="ID")
 	private int id;
 	
-	@Column(name = "TITRE",length = 255 , nullable = false )
-	private String titre ;
+	@Embedded
+	private Auteur auteurEmbedd;
 	
-	@Column(name = "AUTEUR",length = 50 , nullable = false )
-	private String auteur ;
+	@OneToMany(mappedBy = "livre")
+	private List<Emprunt> listeEmpuntL;
 	
-	@ManyToMany (mappedBy="livre")
-	private Set<Livre> livre;
 	
-	public Livre () {
-       
+
+	public Livre() {
+		// TODO Auto-generated constructor stub*
+		this.auteurEmbedd = new Auteur();
 	}
 
-	@Override
-	public String toString() {
-		return "Livre [id=" + id + ", titre=" + titre + ", auteur=" + auteur + "]";
-	}
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getTitre() {
-		return titre;
+
+	@Override
+	public String toString() {
+		return "Livre [id=" + id + 
+				"auteur:"+this.getAuteurEmbedd().getAuteur() +
+				"titre:"+this.getAuteurEmbedd().getTitre() +"]";
 	}
 
-	public void setTitre(String titre) {
-		this.titre = titre;
+
+	public Auteur getAuteurEmbedd() {
+		return auteurEmbedd;
 	}
 
-	public String getAuteur() {
-		return auteur;
+
+	public void setAuteurEmbedd(Auteur auteurEmbedd) {
+		this.auteurEmbedd = auteurEmbedd;
 	}
 
-	public void setAuteur(String auteur) {
-		this.auteur = auteur;
+
+	public List<Emprunt> getListeEmpuntL() {
+		return listeEmpuntL;
 	}
 
-	public Set<Livre> getLivre() {
-		return livre;
-	}
 
-	public void setLivre(Set<Livre> livre) {
-		this.livre = livre;
+	public void setListeEmpuntL(List<Emprunt> listeEmpuntL) {
+		this.listeEmpuntL = listeEmpuntL;
 	}
 
 	
-
-	
-	
-	
-
-
-
-	
-	
-	 
-
 }

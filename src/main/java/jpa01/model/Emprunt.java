@@ -1,10 +1,13 @@
 package jpa01.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,27 +20,25 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name="Emprunt")
+@Table(name="emprunt")
 public class Emprunt {
 
 	@Id
-	@Column (name ="ID")
-	private int id ;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DATE_DEBUT",nullable =false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_DEBUT")
 	private Date dateDebut;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DATE_FIN",nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_FIN")
 	private Date dateFin;
 	
-	@Column(name="DELAI")
-	private int delai;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_CLIENT")
-	private Client id_client; 
+	private Client idClient; 
 	
 	@ManyToMany
 	@JoinTable(name="COMPO",
@@ -49,17 +50,11 @@ public class Emprunt {
 		
 	}
 
-	@Override
-	public String toString() {
-		return "Emprunt [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", delai=" + delai
-				+ ", idClient=" + id_client + ", livre=" + livre + "]";
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -79,20 +74,12 @@ public class Emprunt {
 		this.dateFin = dateFin;
 	}
 
-	public int getDelai() {
-		return delai;
-	}
-
-	public void setDelai(int delai) {
-		this.delai = delai;
-	}
-
 	public Client getIdClient() {
-		return id_client;
+		return idClient;
 	}
 
-	public void setIdClient(Client id_client) {
-		this.id_client = id_client;
+	public void setIdClient(Client idClient) {
+		this.idClient = idClient;
 	}
 
 	public Set<Livre> getLivre() {
@@ -102,8 +89,15 @@ public class Emprunt {
 	public void setLivre(Set<Livre> livre) {
 		this.livre = livre;
 	}
+
 	
-	
+	@Override
+	public String toString() {
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+		return "Emprunt [id=" + id + ", datedebut=" + 
+				formater.format(dateDebut) + 
+				", datefin=" + formater.format(dateFin) + "]";
+	}
 
 	
 	          

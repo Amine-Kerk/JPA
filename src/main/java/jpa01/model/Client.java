@@ -1,36 +1,43 @@
 package jpa01.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CLIENT")
+@Table(name="Client")
 public class Client {
 	
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="NOM", length=50, nullable=false)
+	@Column(name="nom", length=50, nullable=false)
 	private String nom;
 
-	@Column(name="PRENOM", length=50, nullable=false)
+	@Column(name="prenom", length=50, nullable=false)
 	private String prenom;
 
 	@OneToMany(mappedBy="idClient")
-	private List<Emprunt> listEmprunt;
+	private List<Emprunt> listeEmprunt;
 
-	@OneToMany
-	@JoinColumn(name="EMP_ID")
-	private int empId;
 	
+	
+
+
+
 	public Client() {
-		super();
+		
+		this.listeEmprunt = new ArrayList<Emprunt>();
 	}
 
 
@@ -46,7 +53,7 @@ public class Client {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNom() {
@@ -64,21 +71,16 @@ public class Client {
 
 
 
-	public int getEmpId() {
-		return empId;
-	}
-	public List<Emprunt> getListEmprunt() {
-		return listEmprunt;
+
+	public List<Emprunt> getListeEmprunt() {
+		return listeEmprunt;
 	}
 
 
 
-	public void setEmpId(int empId) {
-		this.empId = empId;
-		
-	}
-	public void setListEmprunt(List<Emprunt> listEmprunt) {
-		this.listEmprunt = listEmprunt;
+
+	public void setListeEmprunt(List<Emprunt> listeEmprunt) {
+		this.listeEmprunt = listeEmprunt;
 	}
 
 
